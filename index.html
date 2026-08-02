@@ -662,12 +662,56 @@
     .text-link:hover svg { transform: translateX(4px); }
 
     .portfolio {
-      background: linear-gradient(180deg, #f4f3ff 0%, #fbfbff 100%);
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #e8e5ff 0%, #f0efff 40%, #f8f7ff 75%, #fbfbff 100%);
+    }
+    .portfolio::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(109,74,255,.065) 1.5px, transparent 1.5px);
+      background-size: 30px 30px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .portfolio::after {
+      content: "";
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(109,74,255,.1) 0%, transparent 68%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .portfolio .container {
+      position: relative;
+      z-index: 1;
+    }
+    .portfolio .section-kicker::before {
+      content: "✦ ";
+      opacity: .75;
+    }
+    .portfolio .section-title {
+      background: linear-gradient(135deg, var(--night) 15%, #5235de 70%, var(--purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .portfolio-title-em {
+      font-style: normal;
+      background: linear-gradient(125deg, #6d4aff 0%, #36d7da 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
     .project-card {
       grid-column: span 4;
@@ -680,44 +724,82 @@
       background: #fff;
       box-shadow: var(--shadow-soft);
       text-decoration: none;
-      transition: transform .24s ease, box-shadow .24s ease;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
     }
     .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow);
+      transform: translateY(-9px) scale(1.012);
+      box-shadow: 0 32px 80px rgba(109,74,255,.19);
+      border-color: rgba(109,74,255,.3);
     }
     .project-card.featured { grid-column: span 6; }
+    .project-card.featured .project-art { min-height: 240px; }
     .project-art {
       position: relative;
       min-height: 190px;
       overflow: hidden;
       padding: 24px;
       color: #fff;
-      background: linear-gradient(145deg, #26205f, var(--purple));
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #1c1550, #6d4aff);
+      transition: filter .28s ease;
     }
+    .project-card:hover .project-art { filter: brightness(1.08); }
     .project-art::before,
     .project-art::after {
       content: "";
       position: absolute;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.18);
     }
-    .project-art::before { width: 200px; height: 200px; right: -85px; top: -95px; }
-    .project-art::after { width: 110px; height: 110px; left: -45px; bottom: -60px; }
-    .project-card:nth-child(2) .project-art { background: linear-gradient(145deg, #061b31, #057895); }
-    .project-card:nth-child(3) .project-art { background: linear-gradient(145deg, #31200b, #e39528); }
-    .project-card:nth-child(4) .project-art { background: linear-gradient(145deg, #25123d, #c83f8d); }
-    .project-card:nth-child(5) .project-art { background: linear-gradient(145deg, #102948, #3d75e5); }
-    .project-card:nth-child(6) .project-art { background: linear-gradient(145deg, #071c35, #2d628c); }
-    .project-card:nth-child(7) .project-art { background: linear-gradient(145deg, #0e2c21, #3a9b70); }
+    .project-art::before {
+      width: 260px; height: 260px; right: -95px; top: -105px;
+      border: 1.5px solid rgba(255,255,255,.22);
+      box-shadow: 0 0 0 55px rgba(255,255,255,.04);
+    }
+    .project-art::after {
+      width: 135px; height: 135px; left: -52px; bottom: -68px;
+      border: 1.5px solid rgba(255,255,255,.18);
+    }
+    .project-card:nth-child(2) .project-art {
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #041625, #0092b8);
+    }
+    .project-card:nth-child(3) .project-art {
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #2a1806, #f0a030);
+    }
+    .project-card:nth-child(4) .project-art {
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #1f0c34, #d44ea0);
+    }
+    .project-card:nth-child(5) .project-art {
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #0c1f3a, #4585f0);
+    }
+    .project-card:nth-child(6) .project-art {
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #071527, #3278a5);
+    }
+    .project-card:nth-child(7) .project-art {
+      background-image:
+        radial-gradient(ellipse at 82% 12%, rgba(255,255,255,.14) 0%, transparent 55%),
+        linear-gradient(145deg, #0b2419, #42a878);
+    }
     .project-domain {
       position: relative;
       z-index: 1;
       display: inline-flex;
       padding: 7px 10px;
-      border: 1px solid rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.22);
       border-radius: 999px;
-      background: rgba(255,255,255,.09);
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       font-size: .74rem;
       font-weight: 800;
     }
@@ -729,9 +811,10 @@
       max-width: calc(100% - 48px);
       margin: 0;
       color: #fff;
-      font-size: clamp(1.35rem, 2vw, 1.8rem);
+      font-size: clamp(1.35rem, 2vw, 1.9rem);
       line-height: 1.08;
       letter-spacing: -.035em;
+      text-shadow: 0 2px 12px rgba(0,0,0,.2);
     }
     .project-info {
       display: flex;
@@ -751,6 +834,12 @@
       border-radius: 50%;
       color: var(--purple);
       background: var(--surface-soft);
+      transition: background .24s ease, color .24s ease, transform .24s ease;
+    }
+    .project-card:hover .project-open {
+      background: var(--purple);
+      color: #fff;
+      transform: scale(1.1);
     }
     .project-open svg { width: 18px; height: 18px; }
 
@@ -1125,7 +1214,7 @@
         <div class="section-head reveal">
           <div>
             <p class="section-kicker">Selected work</p>
-            <h2 class="section-title">Ideas brought to life online.</h2>
+            <h2 class="section-title">Ideas brought to life <em class="portfolio-title-em">online.</em></h2>
           </div>
           <p class="section-lead">A growing portfolio spanning specialist rail services, education, community information and youth organisations.</p>
         </div>
