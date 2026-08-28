@@ -1105,40 +1105,111 @@
     }
 
 
-    /* Portfolio screenshot cards */
-    .project-art.project-art-image {
-      min-height: 225px;
-      padding: 24px;
-      background: var(--night);
+
+    /* Portfolio homepage preview cards v2 */
+    .project-art.project-homepage-preview {
+      position: relative;
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+      padding: 0;
+      overflow: hidden;
+      background: #eceef5;
+      border-bottom: 1px solid var(--line);
     }
-    .project-art.project-art-image > img {
+    .project-art.project-homepage-preview::before,
+    .project-art.project-homepage-preview::after { display: none; }
+    .project-card:hover .project-art.project-homepage-preview { filter: none; }
+    .project-preview-fallback {
       position: absolute;
       inset: 0;
+      display: grid;
+      place-content: center;
+      gap: 5px;
+      padding: 78px 24px 28px;
+      text-align: center;
+      color: var(--night);
+      background:
+        radial-gradient(circle at 80% 10%, rgba(109,74,255,.15), transparent 32%),
+        linear-gradient(145deg, #f7f7fc, #e6e7f2);
+    }
+    .project-preview-fallback span {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      letter-spacing: -.04em;
+    }
+    .project-preview-fallback small { color: var(--muted); font-weight: 750; }
+    .project-art.project-homepage-preview > .project-preview-image {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top center;
+      background: #fff;
       transition: transform .4s ease, filter .28s ease;
     }
-    .project-art.project-art-image::before {
-      inset: 0;
+    .project-card:hover .project-art.project-homepage-preview > .project-preview-image {
+      transform: scale(1.018);
+      filter: brightness(1.02);
+    }
+    .project-art.project-homepage-preview .project-domain {
+      position: absolute;
+      z-index: 3;
+      top: 16px;
+      left: 16px;
+      color: #fff;
+      background: rgba(17,16,42,.8);
+      border-color: rgba(255,255,255,.25);
+      box-shadow: 0 5px 16px rgba(0,0,0,.15);
+    }
+    .project-logo-badge {
+      position: absolute;
+      z-index: 3;
+      top: 14px;
+      right: 14px;
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(17,16,42,.1);
+      border-radius: 18px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 10px 28px rgba(17,16,42,.18);
+    }
+    .project-logo-fallback {
+      position: absolute;
+      color: var(--night);
+      font-size: .72rem;
+      font-weight: 950;
+      letter-spacing: -.02em;
+    }
+    .project-logo-badge img {
+      position: relative;
       z-index: 1;
-      width: auto;
-      height: auto;
-      border: 0;
-      border-radius: 0;
-      box-shadow: none;
-      background: linear-gradient(180deg, rgba(17,16,42,.05) 18%, rgba(17,16,42,.18) 48%, rgba(17,16,42,.9) 100%);
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
     }
-    .project-art.project-art-image::after { display: none; }
-    .project-card:hover .project-art.project-art-image > img {
-      transform: scale(1.025);
-      filter: brightness(1.04);
+    .project-info { align-items: center; }
+    .project-meta { min-width: 0; }
+    .project-meta h3 {
+      margin: 0 0 7px;
+      color: var(--night);
+      font-size: 1.15rem;
+      line-height: 1.15;
+      letter-spacing: -.025em;
     }
-    .project-art.project-art-image .project-domain,
-    .project-art.project-art-image h3 { z-index: 2; }
+    .project-meta p { margin: 0; }
     .project-card-static { cursor: default; }
     .project-card-static:hover { transform: translateY(-6px); }
+
+    @media (max-width: 520px) {
+      .project-logo-badge { width: 58px; height: 58px; border-radius: 15px; }
+      .project-logo-badge img { width: 40px; height: 40px; }
+      .project-art.project-homepage-preview .project-domain { top: 12px; left: 12px; }
+    }
 
   </style>
 </head>
@@ -1258,83 +1329,119 @@
 
         <div class="portfolio-grid">
           <a class="project-card reveal" href="https://bodge-job.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/bodge-job.png" alt="Bodge Job website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>BJ</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://bodge-job.com/" alt="Bodge Job homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">bodge-job.com</span>
-              <h3>Bodge Job</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">BJ</span>
+                <img src="https://www.google.com/s2/favicons?domain=bodge-job.com&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Mobile-first website design with clear service discovery and straightforward enquiry journeys.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>Bodge Job</h3><p>Mobile-first website design with clear service discovery and straightforward enquiry journeys.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <article class="project-card project-card-static reveal">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/trac.png" alt="TRAC website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>TRAC</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="assets/portfolio/trac.png" alt="TRAC homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">TRAC</span>
-              <h3>TRAC</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">TRAC</span>
+              </span>
             </div>
-            <div class="project-info"><p>Professional service-led interface built around trust, clarity and confident calls to action.</p></div>
+            <div class="project-info"><div class="project-meta"><h3>TRAC</h3><p>Professional service-led interface built around trust, clarity and confident calls to action.</p></div></div>
           </article>
 
           <a class="project-card reveal" href="https://traindriveracademy.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/train-driver-academy.png" alt="UK Train Driver Academy website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>UKTDA</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://traindriveracademy.com/" alt="UK Train Driver Academy homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">traindriveracademy.com</span>
-              <h3>UK Train Driver Academy</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">UKTDA</span>
+                <img src="https://www.google.com/s2/favicons?domain=traindriveracademy.com&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Content-led responsive design that makes specialist guidance easy to navigate.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>UK Train Driver Academy</h3><p>Content-led responsive design that makes specialist guidance easy to navigate.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://traindriverfoundation.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/train-driver-foundation.png" alt="Train Driver Foundation website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>TDF</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://traindriverfoundation.com/" alt="Train Driver Foundation homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">traindriverfoundation.com</span>
-              <h3>Train Driver Foundation</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">TDF</span>
+                <img src="https://www.google.com/s2/favicons?domain=traindriverfoundation.com&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Structured learning experience with clear pathways through courses, guidance and resources.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>Train Driver Foundation</h3><p>Structured learning experience with clear pathways through courses, guidance and resources.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://traindriverpsychometrics.co.uk/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/train-driver-psychometrics.png" alt="Train Driver Psychometrics website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>TDP</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://traindriverpsychometrics.co.uk/" alt="Train Driver Psychometrics homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">traindriverpsychometrics.co.uk</span>
-              <h3>Train Driver Psychometrics</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">TDP</span>
+                <img src="https://www.google.com/s2/favicons?domain=traindriverpsychometrics.co.uk&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Focused assessment interface designed for clarity, confidence and distraction-free practice.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>Train Driver Psychometrics</h3><p>Focused assessment interface designed for clarity, confidence and distraction-free practice.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://railwaycareers.co.uk/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/railway-careers.png" alt="Railway Careers UK website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>RCUK</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://railwaycareers.co.uk/" alt="Railway Careers UK homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">railwaycareers.co.uk</span>
-              <h3>Railway Careers UK</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">RCUK</span>
+                <img src="https://www.google.com/s2/favicons?domain=railwaycareers.co.uk&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Search-friendly careers experience with strong information hierarchy and clear next steps.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>Railway Careers UK</h3><p>Search-friendly careers experience with strong information hierarchy and clear next steps.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://grade9ready.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/grade-9-ready.png" alt="Grade 9 Ready website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>G9</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://grade9ready.com/" alt="Grade 9 Ready homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">grade9ready.com</span>
-              <h3>Grade 9 Ready</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">G9</span>
+                <img src="https://www.google.com/s2/favicons?domain=grade9ready.com&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Bright, accessible learning interface designed around revision journeys and student confidence.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>Grade 9 Ready</h3><p>Bright, accessible learning interface designed around revision journeys and student confidence.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://1471squadron.co.uk/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art project-art-image">
-              <img src="assets/portfolio/1471-horwich-squadron.png" alt="1471 Horwich Squadron website screenshot" loading="lazy">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>1471</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://1471squadron.co.uk/" alt="1471 Horwich Squadron RAFAC homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">1471squadron.co.uk</span>
-              <h3>1471 Horwich Squadron RAFAC</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">1471</span>
+                <img src="https://1471squadron.co.uk/favicon.ico" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Youth-focused information site with simple navigation, recruitment messaging and mobile usability.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>1471 Horwich Squadron RAFAC</h3><p>Youth-focused information site with simple navigation, recruitment messaging and mobile usability.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://blackrodnow.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+            <div class="project-art project-homepage-preview">
+              <div class="project-preview-fallback" aria-hidden="true"><span>BN</span><small>Homepage preview</small></div>
+              <img class="project-preview-image" src="https://image.thum.io/get/width/1400/crop/788/noanimate/https://blackrodnow.com/" alt="Blackrod Now homepage preview" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">
               <span class="project-domain">blackrodnow.com</span>
-              <h3>Blackrod Now</h3>
+              <span class="project-logo-badge" aria-hidden="true">
+                <span class="project-logo-fallback">BN</span>
+                <img src="https://www.google.com/s2/favicons?domain=blackrodnow.com&amp;sz=128" alt="" loading="lazy" onerror="this.remove()">
+              </span>
             </div>
-            <div class="project-info"><p>Community-first information design that makes local updates and useful content easy to find.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><div class="project-meta"><h3>Blackrod Now</h3><p>Community-first information design that makes local updates and useful content easy to find.</p></div><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
         </div>
