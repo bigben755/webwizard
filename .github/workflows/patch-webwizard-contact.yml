@@ -1,0 +1,45 @@
+name: Wire Web Wizard contact form
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/patch-webwizard-contact.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch contact form
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          s=s.replace('A few details are enough to begin. The form will open a prepared email in your normal email application.','A few details are enough to begin. Send the form and your enquiry will land directly with The Web Wizard.')
+          s=s.replace('<button class="button button-dark" type="submit">Prepare my enquiry</button>','<button class="button button-dark" type="submit">Send enquiry</button>')
+          s=s.replace('<p class="form-note">This demonstration form uses your email application rather than storing information on the website.</p>','<p class="form-note">Your enquiry is sent securely to The Web Wizard and can be replied to directly.</p>')
+          old='''    /* ================================================================\n       EASY EDIT: replace this with the real enquiry email address.\n       Example: const CONTACT_EMAIL = "hello@thewebwizard.co.uk";\n       ================================================================ */\n    const CONTACT_EMAIL = "hello@yourdomain.co.uk";\n\n'''
+          s=s.replace(old,'')
+          start=s.index("    form.addEventListener('submit', event => {")
+          end=s.index("    });", start)+7
+          new='''    form.addEventListener('submit', async event => {\n      event.preventDefault();\n      const submit = form.querySelector('button[type="submit"]');\n      submit.disabled = true;\n      status.textContent = 'Sending your enquiry…';\n      const data = new FormData(form);\n      const payload = {\n        name: data.get('name'),\n        organisation: data.get('organisation') || '',\n        email: data.get('email'),\n        project_type: data.get('project-type'),\n        message: data.get('message'),\n        website: ''\n      };\n      try {\n        const response = await fetch('https://aovgfefhybcptxdauyqy.supabase.co/functions/v1/submit-webwizard-enquiry', {\n          method: 'POST',\n          headers: {'Content-Type':'application/json'},\n          body: JSON.stringify(payload)\n        });\n        const result = await response.json().catch(() => ({}));\n        if (!response.ok) throw new Error(result.error || 'We could not send your enquiry. Please try again.');\n        status.textContent = 'Thanks — your enquiry has been sent successfully.';\n        form.reset();\n      } catch (error) {\n        status.textContent = error.message || 'We could not send your enquiry. Please try again.';\n      } finally {\n        submit.disabled = false;\n      }\n    });'''
+          s=s[:start]+new+s[end:]
+          p.write_text(s)
+          PY
+      - name: Commit contact form integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No changes needed"
+          else
+            git commit -m "Send Web Wizard enquiries to admin inbox"
+            git push
+          fi
