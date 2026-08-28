@@ -1,0 +1,48 @@
+name: Refresh portfolio previews
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - 'scripts/capture-portfolio-previews.mjs'
+      - '.github/workflows/refresh-portfolio-previews.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture local previews and patch page
+        run: node scripts/capture-portfolio-previews.mjs
+
+      - name: Commit generated previews
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/portfolio-fast
+          if git diff --cached --quiet; then
+            echo "No portfolio changes required."
+            exit 0
+          fi
+          git commit -m "Use fast local portfolio previews [skip ci]"
+          git push origin HEAD:main
