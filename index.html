@@ -1103,6 +1103,43 @@
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       .reveal { opacity: 1; transform: none; }
     }
+
+
+    /* Portfolio screenshot cards */
+    .project-art.project-art-image {
+      min-height: 225px;
+      padding: 24px;
+      background: var(--night);
+    }
+    .project-art.project-art-image > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform .4s ease, filter .28s ease;
+    }
+    .project-art.project-art-image::before {
+      inset: 0;
+      z-index: 1;
+      width: auto;
+      height: auto;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: linear-gradient(180deg, rgba(17,16,42,.05) 18%, rgba(17,16,42,.18) 48%, rgba(17,16,42,.9) 100%);
+    }
+    .project-art.project-art-image::after { display: none; }
+    .project-card:hover .project-art.project-art-image > img {
+      transform: scale(1.025);
+      filter: brightness(1.04);
+    }
+    .project-art.project-art-image .project-domain,
+    .project-art.project-art-image h3 { z-index: 2; }
+    .project-card-static { cursor: default; }
+    .project-card-static:hover { transform: translateY(-6px); }
+
   </style>
 </head>
 <body>
@@ -1161,7 +1198,7 @@
       <div class="container">
         <div class="proof-panel reveal">
           <div class="proof-intro">Digital projects across education, rail, youth and community organisations.</div>
-          <div class="proof-item"><strong>7</strong><span>projects showcased</span></div>
+          <div class="proof-item"><strong>9</strong><span>projects showcased</span></div>
           <div class="proof-item"><strong>1</strong><span>clear point of contact</span></div>
           <div class="proof-item"><strong>100%</strong><span>responsive layouts</span></div>
         </div>
@@ -1216,56 +1253,80 @@
             <p class="section-kicker">Selected work</p>
             <h2 class="section-title">Ideas brought to life <em class="portfolio-title-em">online.</em></h2>
           </div>
-          <p class="section-lead">A growing portfolio spanning specialist rail services, education, community information and youth organisations.</p>
+          <p class="section-lead">A growing portfolio of responsive websites and digital products spanning specialist services, education, community information and youth organisations.</p>
         </div>
 
         <div class="portfolio-grid">
-          <a class="project-card featured reveal" href="https://traindriveracademy.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+          <a class="project-card reveal" href="https://bodge-job.com/" target="_blank" rel="noopener noreferrer">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/bodge-job.png" alt="Bodge Job website screenshot" loading="lazy">
+              <span class="project-domain">bodge-job.com</span>
+              <h3>Bodge Job</h3>
+            </div>
+            <div class="project-info"><p>Mobile-first website design with clear service discovery and straightforward enquiry journeys.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+          </a>
+
+          <article class="project-card project-card-static reveal">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/trac.png" alt="TRAC website screenshot" loading="lazy">
+              <span class="project-domain">TRAC</span>
+              <h3>TRAC</h3>
+            </div>
+            <div class="project-info"><p>Professional service-led interface built around trust, clarity and confident calls to action.</p></div>
+          </article>
+
+          <a class="project-card reveal" href="https://traindriveracademy.com/" target="_blank" rel="noopener noreferrer">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/train-driver-academy.png" alt="UK Train Driver Academy website screenshot" loading="lazy">
               <span class="project-domain">traindriveracademy.com</span>
               <h3>UK Train Driver Academy</h3>
             </div>
-            <div class="project-info"><p>Specialist rail-sector website and digital service.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Content-led responsive design that makes specialist guidance easy to navigate.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
-          <a class="project-card featured reveal" href="https://traindriverfoundation.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+          <a class="project-card reveal" href="https://traindriverfoundation.com/" target="_blank" rel="noopener noreferrer">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/train-driver-foundation.png" alt="Train Driver Foundation website screenshot" loading="lazy">
               <span class="project-domain">traindriverfoundation.com</span>
               <h3>Train Driver Foundation</h3>
             </div>
-            <div class="project-info"><p>Learning-focused platform for aspiring rail professionals.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Structured learning experience with clear pathways through courses, guidance and resources.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://traindriverpsychometrics.co.uk/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/train-driver-psychometrics.png" alt="Train Driver Psychometrics website screenshot" loading="lazy">
               <span class="project-domain">traindriverpsychometrics.co.uk</span>
               <h3>Train Driver Psychometrics</h3>
             </div>
-            <div class="project-info"><p>Dedicated online psychometric practice experience.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Focused assessment interface designed for clarity, confidence and distraction-free practice.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://railwaycareers.co.uk/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/railway-careers.png" alt="Railway Careers UK website screenshot" loading="lazy">
               <span class="project-domain">railwaycareers.co.uk</span>
               <h3>Railway Careers UK</h3>
             </div>
-            <div class="project-info"><p>Careers platform connecting people with rail opportunities.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Search-friendly careers experience with strong information hierarchy and clear next steps.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://grade9ready.com/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/grade-9-ready.png" alt="Grade 9 Ready website screenshot" loading="lazy">
               <span class="project-domain">grade9ready.com</span>
               <h3>Grade 9 Ready</h3>
             </div>
-            <div class="project-info"><p>Education-focused digital resource and learning brand.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Bright, accessible learning interface designed around revision journeys and student confidence.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://1471squadron.co.uk/" target="_blank" rel="noopener noreferrer">
-            <div class="project-art">
+            <div class="project-art project-art-image">
+              <img src="assets/portfolio/1471-horwich-squadron.png" alt="1471 Horwich Squadron website screenshot" loading="lazy">
               <span class="project-domain">1471squadron.co.uk</span>
               <h3>1471 Horwich Squadron RAFAC</h3>
             </div>
-            <div class="project-info"><p>Public information and recruitment website.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Youth-focused information site with simple navigation, recruitment messaging and mobile usability.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
 
           <a class="project-card reveal" href="https://blackrodnow.com/" target="_blank" rel="noopener noreferrer">
@@ -1273,8 +1334,9 @@
               <span class="project-domain">blackrodnow.com</span>
               <h3>Blackrod Now</h3>
             </div>
-            <div class="project-info"><p>Local information and community-focused website.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
+            <div class="project-info"><p>Community-first information design that makes local updates and useful content easy to find.</p><span class="project-open" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg></span></div>
           </a>
+
         </div>
       </div>
     </section>
