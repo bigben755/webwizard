@@ -1212,6 +1212,26 @@
     }
 
 
+
+    /* Pricing */
+    .pricing-section{position:relative;background:linear-gradient(180deg,#fff 0%,#f7f6ff 100%)}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:34px;align-items:stretch}
+    .price-card{position:relative;display:flex;flex-direction:column;padding:28px;border:1px solid var(--line);border-radius:22px;background:#fff;box-shadow:var(--shadow-soft)}
+    .price-card.featured{border-color:rgba(109,74,255,.42);box-shadow:0 24px 60px rgba(83,57,190,.14);transform:translateY(-6px)}
+    .price-badge{position:absolute;top:16px;right:16px;padding:6px 9px;border-radius:999px;background:var(--surface-soft);color:var(--purple-dark);font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em}
+    .price-card h3{margin:0;color:var(--night);font-size:1.22rem}
+    .price-for{margin-top:5px;color:var(--muted);font-size:.82rem;line-height:1.5}
+    .price{display:flex;align-items:flex-end;gap:7px;margin:23px 0 18px;color:var(--night)}
+    .price strong{font-size:2.7rem;line-height:.9;letter-spacing:-.06em}.price span{padding-bottom:4px;color:var(--muted);font-size:.8rem;font-weight:800}
+    .price-list{display:grid;gap:10px;margin:0 0 26px;padding:0;list-style:none;color:#555568;font-size:.86rem}
+    .price-list li{position:relative;padding-left:24px;line-height:1.45}.price-list li::before{content:'✓';position:absolute;left:0;top:0;color:var(--purple);font-weight:950}
+    .price-card .button{margin-top:auto;width:100%;justify-content:center}
+    .care-strip{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;margin-top:22px;padding:25px 28px;border:1px solid rgba(109,74,255,.16);border-radius:20px;background:linear-gradient(135deg,#17142f,#29205d);color:#fff;box-shadow:var(--shadow-soft)}
+    .care-strip h3{margin:0 0 7px;font-size:1.15rem}.care-strip p{margin:0;color:rgba(255,255,255,.7);font-size:.86rem;line-height:1.6;max-width:760px}
+    .care-price{text-align:right;white-space:nowrap}.care-price strong{display:block;font-size:1.8rem;letter-spacing:-.04em}.care-price span{font-size:.72rem;color:rgba(255,255,255,.62)}
+    .pricing-note{margin:20px auto 0;max-width:880px;text-align:center;color:var(--muted);font-size:.78rem;line-height:1.6}
+    @media(max-width:900px){.pricing-grid{grid-template-columns:1fr}.price-card.featured{transform:none}.care-strip{grid-template-columns:1fr}.care-price{text-align:left}}
+
     /* Customer control / demo editor section */
     .customer-control {
       position: relative;
@@ -1503,6 +1523,7 @@
       <nav class="nav-links" id="main-navigation" aria-label="Main navigation">
         <a href="#services">Services</a>
         <a href="#work">Our work</a>
+        <a href="#pricing">Pricing</a>
         <a href="#process">Process</a>
         <a href="#questions">Questions</a>
         <a class="nav-cta" href="#contact">Start a project</a>
@@ -1705,6 +1726,78 @@
     </section>
 
 
+
+
+    <section class="pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Straightforward pricing</p>
+            <h2 class="section-title">Professional websites. Small-business prices.</h2>
+          </div>
+          <p class="section-lead">You get a professionally built website rather than another DIY subscription to figure out yourself. Choose a simple starting point and only add complexity when your business actually needs it.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <h3>One Page Launch</h3>
+            <p class="price-for">For a new venture, local service or simple professional presence.</p>
+            <div class="price"><strong>£129</strong><span>one-off</span></div>
+            <ul class="price-list">
+              <li>Professionally designed one-page website</li>
+              <li>Mobile, tablet and desktop responsive</li>
+              <li>Contact form and social links</li>
+              <li>Basic search-friendly setup</li>
+              <li>One round of revisions</li>
+              <li>Web Wizard address included</li>
+            </ul>
+            <a class="button button-secondary" href="#contact">Choose One Page Launch</a>
+          </article>
+
+          <article class="price-card featured reveal">
+            <span class="price-badge">Most popular</span>
+            <h3>Small Business</h3>
+            <p class="price-for">A complete website for most sole traders, small businesses and organisations.</p>
+            <div class="price"><strong>£179</strong><span>one-off</span></div>
+            <ul class="price-list">
+              <li>Up to five professionally built pages</li>
+              <li>Customer editor for routine updates</li>
+              <li>Contact form, maps and social links</li>
+              <li>Basic on-page SEO across the site</li>
+              <li>Content and wording tidy-up</li>
+              <li>Two rounds of revisions</li>
+              <li>Existing domain connection included</li>
+            </ul>
+            <a class="button button-primary" href="#contact">Choose Small Business</a>
+          </article>
+
+          <article class="price-card reveal">
+            <h3>Business Plus</h3>
+            <p class="price-for">For businesses needing more pages, content types and room to grow.</p>
+            <div class="price"><strong>£299</strong><span>one-off</span></div>
+            <ul class="price-list">
+              <li>Up to ten professionally built pages</li>
+              <li>News, blog, gallery or FAQ sections as required</li>
+              <li>Analytics and Search Console setup</li>
+              <li>Enhanced on-page SEO structure</li>
+              <li>Customer editor for routine updates</li>
+              <li>Three rounds of revisions</li>
+              <li>Priority launch support</li>
+            </ul>
+            <a class="button button-secondary" href="#contact">Choose Business Plus</a>
+          </article>
+        </div>
+
+        <div class="care-strip reveal">
+          <div>
+            <h3>Optional Website Care</h3>
+            <p>Technical hosting, SSL, monitoring, version recovery and ongoing support for <strong>£6.99 a month</strong>. One small assisted content change each quarter is included. Prefer to manage routine content yourself? Your editor remains available without taking the care plan.</p>
+          </div>
+          <div class="care-price"><strong>£6.99</strong><span>per month · optional</span></div>
+        </div>
+        <p class="pricing-note">Existing domain connection is included where technically possible. If you need a new custom domain, registration is charged separately at the registrar cost. A Web Wizard address such as <strong>yourbusiness.thewebdesignwizard.co.uk</strong> can be used instead. Bespoke integrations, online shops and unusually complex functionality are quoted separately before work begins.</p>
+      </div>
+    </section>
 
     <!-- WEB-WIZARD-CUSTOMER-CONTROL -->
     <section class="customer-control" id="control">
