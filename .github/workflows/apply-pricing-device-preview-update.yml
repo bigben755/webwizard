@@ -1,0 +1,42 @@
+name: Apply pricing and device preview update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/apply-pricing-device-preview-update.py'
+      - '.github/workflows/apply-pricing-device-preview-update.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply guarded update
+        run: python scripts/apply-pricing-device-preview-update.py
+
+      - name: Verify update
+        run: |
+          git diff --exit-code --quiet -- demo-editor.html index.html && {
+            echo "Expected HTML changes were not produced."
+            exit 1
+          }
+          git diff --check
+
+      - name: Commit and clean up helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add demo-editor.html index.html
+          git rm scripts/apply-pricing-device-preview-update.py .github/workflows/apply-pricing-device-preview-update.yml
+          git commit -m "Add competitive pricing and realistic device previews [skip ci]"
+          git push origin HEAD:main
