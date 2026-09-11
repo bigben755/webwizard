@@ -1,0 +1,49 @@
+name: Apply Stripe payment links
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/apply-stripe-payment-links.py'
+      - '.github/workflows/apply-stripe-payment-links.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply guarded update
+        run: python scripts/apply-stripe-payment-links.py
+
+      - name: Verify update
+        run: |
+          git diff --exit-code --quiet -- index.html && {
+            echo "Expected index.html changes were not produced."
+            exit 1
+          }
+          git diff --check
+          grep -q 'buy.stripe.com/bJe6oJ8YH3vxfVV3Px77O06' index.html
+          grep -q 'buy.stripe.com/fZu28t4Ir5DFaBB0Dl77O05' index.html
+          grep -q 'buy.stripe.com/9B65kF6Qz8PR9xx3Px77O04' index.html
+          grep -q 'buy.stripe.com/28E14pej1d6725599R77O03' index.html
+          grep -q 'buy.stripe.com/14AeVf2AjaXZbFF5XF77O02' index.html
+          grep -q 'buy.stripe.com/14AeVf5Mv9TVeRR5XF77O01' index.html
+          grep -q 'buy.stripe.com/cNi6oJej15DFgZZ2Lt77O00' index.html
+
+      - name: Commit and clean up helpers
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm scripts/apply-stripe-payment-links.py .github/workflows/apply-stripe-payment-links.yml
+          git commit -m "Add Stripe payment links to pricing [skip ci]"
+          git push origin HEAD:main
