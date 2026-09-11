@@ -1226,7 +1226,9 @@
 .monthly-option{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 8px;margin:-6px 0 21px;padding:11px 13px;border:1px solid rgba(109,74,255,.14);border-radius:12px;background:#faf9ff;color:var(--muted);font-size:.76rem;line-height:1.45}.monthly-option strong{color:var(--purple-dark);font-size:1rem}.monthly-option small{flex-basis:100%;font-size:.68rem;color:var(--muted)}
     .price-list{display:grid;gap:10px;margin:0 0 26px;padding:0;list-style:none;color:#555568;font-size:.86rem}
     .price-list li{position:relative;padding-left:24px;line-height:1.45}.price-list li::before{content:'✓';position:absolute;left:0;top:0;color:var(--purple);font-weight:950}
-    .price-card .button{margin-top:auto;width:100%;justify-content:center}
+    .price-card .button{width:100%;justify-content:center}
+.payment-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:auto}.payment-actions .button{font-size:.78rem;padding:11px 12px}.care-strip .button{white-space:nowrap}
+@media(max-width:520px){.payment-actions{grid-template-columns:1fr}}
     .care-strip{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center;margin-top:22px;padding:25px 28px;border:1px solid rgba(109,74,255,.16);border-radius:20px;background:linear-gradient(135deg,#17142f,#29205d);color:#fff;box-shadow:var(--shadow-soft)}
     .care-strip h3{margin:0 0 7px;font-size:1.15rem}.care-strip p{margin:0;color:rgba(255,255,255,.7);font-size:.86rem;line-height:1.6;max-width:760px}
     .care-price{text-align:right;white-space:nowrap}.care-price strong{display:block;font-size:1.8rem;letter-spacing:-.04em}.care-price span{font-size:.72rem;color:rgba(255,255,255,.62)}
@@ -1753,7 +1755,7 @@
               <li>One round of revisions</li>
               <li>Web Wizard address included</li>
             </ul>
-            <a class="button button-secondary" href="#contact">Choose One Page Launch</a>
+            <div class="payment-actions"><a class="button button-secondary" href="https://buy.stripe.com/bJe6oJ8YH3vxfVV3Px77O06" target="_blank" rel="noopener noreferrer">Pay £132 in full</a><a class="button button-primary" href="https://buy.stripe.com/fZu28t4Ir5DFaBB0Dl77O05" target="_blank" rel="noopener noreferrer">Pay £11/month</a></div>
           </article>
 
           <article class="price-card featured reveal">
@@ -1771,7 +1773,7 @@
               <li>Two rounds of revisions</li>
               <li>Existing domain connection included</li>
             </ul>
-            <a class="button button-primary" href="#contact">Choose Small Business</a>
+            <div class="payment-actions"><a class="button button-secondary" href="https://buy.stripe.com/9B65kF6Qz8PR9xx3Px77O04" target="_blank" rel="noopener noreferrer">Pay £180 in full</a><a class="button button-primary" href="https://buy.stripe.com/28E14pej1d6725599R77O03" target="_blank" rel="noopener noreferrer">Pay £15/month</a></div>
           </article>
 
           <article class="price-card reveal">
@@ -1788,7 +1790,7 @@
               <li>Three rounds of revisions</li>
               <li>Priority launch support</li>
             </ul>
-            <a class="button button-secondary" href="#contact">Choose Business Plus</a>
+            <div class="payment-actions"><a class="button button-secondary" href="https://buy.stripe.com/14AeVf2AjaXZbFF5XF77O02" target="_blank" rel="noopener noreferrer">Pay £300 in full</a><a class="button button-primary" href="https://buy.stripe.com/14AeVf5Mv9TVeRR5XF77O01" target="_blank" rel="noopener noreferrer">Pay £25/month</a></div>
           </article>
         </div>
 
@@ -1797,7 +1799,7 @@
             <h3>Optional Website Care</h3>
             <p>Technical hosting, SSL, monitoring, version recovery and ongoing support for <strong>£6.99 a month</strong>. One small assisted content change each quarter is included. Prefer to manage routine content yourself? Your editor remains available without taking the care plan.</p>
           </div>
-          <div class="care-price"><strong>£6.99</strong><span>per month · optional</span></div>
+          <div class="care-price"><strong>£6.99</strong><span>per month · optional</span><a class="button button-primary" href="https://buy.stripe.com/cNi6oJej15DFgZZ2Lt77O00" target="_blank" rel="noopener noreferrer" style="margin-top:12px">Add Website Care</a></div>
         </div>
         <p class="pricing-note">Choose to pay the website price once or split exactly the same total across 12 monthly payments. Existing domain connection is included where technically possible. If you need a new custom domain, registration is charged separately at the registrar cost. A Web Wizard address such as <strong>yourbusiness.thewebdesignwizard.co.uk</strong> can be used instead. Bespoke integrations, online shops and unusually complex functionality are quoted separately before work begins.</p>
       </div>
